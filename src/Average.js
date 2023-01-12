@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 export default function Average() {
   const [list, setList] = useState([]);
   const [number, setNumber] = useState('');
+  const avg = useMemo(() => getAverage(list), [list]);
 
   const onChange = (e) => {
     setNumber(e.target.value);
@@ -29,7 +30,7 @@ export default function Average() {
       </ol>
       <div>
         <p>
-          <strong>평균값: {getAverage(list)}</strong>
+          <strong>평균값: {avg}</strong>
         </p>
       </div>
     </div>
@@ -37,7 +38,7 @@ export default function Average() {
 }
 
 const getAverage = (numbers) => {
-  console.log('reload...');
+  console.log('only input');
   if (numbers.length === 0) return 0;
   const sum = numbers.reduce((a, b) => a + b);
   return sum / numbers.length;
